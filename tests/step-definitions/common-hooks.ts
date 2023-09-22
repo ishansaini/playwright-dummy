@@ -1,5 +1,5 @@
 import { ICustomWorld } from "./custom-world";
-import * as core from '@actions/core' 
+import * as core from '@actions/core';
 import {
 	ChromiumBrowser,
 	chromium
@@ -20,6 +20,17 @@ Before(async function(this: ICustomWorld) {
 After(async function(this: ICustomWorld) {
   await this.page?.close()
   await this.context?.close()
+  await core.summary
+    .addHeading('E2E test results')
+    .addCodeBlock("Explore playwright", "js")
+    .addTable([
+      [{data: 'File', header: true}, {data: 'Result', header: true}],
+      ['foo.js', 'Pass ✅'],
+      ['bar.js', 'Fail ❌'],
+      ['test.js', 'Pass ✅']
+    ])
+    .addLink('View staging deployment!', 'https://github.com')
+    .write()
 });
   
 AfterAll(async function() {

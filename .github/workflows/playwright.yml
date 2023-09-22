@@ -25,5 +25,5 @@ jobs:
         name: playwright-report
         path: reports/ 
         retention-days: 30
-    - name: Adding markdown
-      run: echo '### Hello world! 🚀' >> $GITHUB_STEP_SUMMARY
+    # - name: Adding markdown
+    #   run: echo '### Hello world! 🚀' >> $GITHUB_STEP_SUMMARY
