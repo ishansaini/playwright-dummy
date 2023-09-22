@@ -1,4 +1,5 @@
 import { ICustomWorld } from "./custom-world";
+import * as core from '@actions/core' 
 import {
 	ChromiumBrowser,
 	chromium
@@ -22,5 +23,16 @@ After(async function(this: ICustomWorld) {
 });
   
 AfterAll(async function() {
+  await core.summary
+  .addHeading('Test Results')
+  .addCodeBlock("generateTestResults()", "js")
+  .addTable([
+    [{data: 'File', header: true}, {data: 'Result', header: true}],
+    ['foo.js', 'Pass ✅'],
+    ['bar.js', 'Fail ❌'],
+    ['test.js', 'Pass ✅']
+  ])
+  .addLink('View staging deployment!', 'https://github.com')
+  .write()
   await browser.close()
 });
