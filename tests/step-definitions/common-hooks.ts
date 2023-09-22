@@ -9,7 +9,7 @@ import { After, AfterAll, Before, BeforeAll } from '@cucumber/cucumber'
 let browser: ChromiumBrowser
 
 BeforeAll(async function() {
-    browser = await chromium.launch({ headless: false })
+    browser = await chromium.launch({ headless: true })
   });
   
 Before(async function(this: ICustomWorld) {

@@ -2,20 +2,24 @@ import { Given, When, Then } from '@cucumber/cucumber'
 import { expect } from '@playwright/test'
 import { ICustomWorld } from './custom-world'
 
-Given('User visits homepage', async function (this: ICustomWorld) {
+Given('User visits playwright homepage', async function (this: ICustomWorld) {
     const page = this.page!
-    await page.goto('localhost:3000')
+    await page.goto('https://playwright.dev/');
+
+    // Expect a title "to contain" a substring.
+    await expect(page).toHaveTitle(/end-to-end/);
 })
 
-When('User clicks the + button', async function (this: ICustomWorld) {
+When('User clicks on "GET STARTED" button', async function (this: ICustomWorld) {
     const page = this.page!
-    const plusButton = await page.locator('[data-testid="increase"]')
-    await expect(plusButton).toBeVisible()
-    await plusButton.click()
+    await page.getByRole('link', { name: 'Get started' }).click();
+
+    // Expects page to have a heading with the name of Installation.
+    await expect(page.getByRole('heading', { name: 'Installing Playwright' })).toBeVisible();
 })
 
-Then('User sees the counter get increased', async function (this: ICustomWorld) {
+Then('User is able to navigate to community tab', async function (this: ICustomWorld) {
     const page = this.page!
-    const counterText = await page.locator('[data-testid="counter-text"]')
-    await expect(counterText).toHaveText('Count: 1')
+    await page.getByRole('link', { name: 'Community' }).click();
+    await expect(page.getByRole('heading', {name: 'Ambassadors'})).toBeVisible
 })
