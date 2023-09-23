@@ -5,7 +5,6 @@ import {
 	chromium
 } from '@playwright/test'
 import { After, AfterAll, Before, BeforeAll } from '@cucumber/cucumber'
-import { Scenario } from "@cucumber/messages";
 
 let browser: ChromiumBrowser
 
@@ -13,18 +12,18 @@ BeforeAll(async function() {
     browser = await chromium.launch({ headless: true })
   });
   
-Before(async function(this: ICustomWorld) {
+Before(async function(this: ICustomWorld, scenario) {
   this.context = await browser.newContext()
   this.page = await this.context.newPage()
 });
 
-After(async function(this: ICustomWorld) {
+After(async function(this: ICustomWorld, scenario) {
   await core.summary
     .addHeading('E2E test results')
     .addCodeBlock("Explore playwright", "js")
     .addTable([
       [{data: 'File', header: true}, {data: 'Result', header: true}],
-      [Scenario.name, 'Pass ✅'],
+      [scenario.pickle.name, scenario.result?.status + ' ✅'],
       ['bar.js', 'Fail ❌'],
       ['test.js', 'Pass ✅']
     ])
