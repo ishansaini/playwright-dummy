@@ -12,10 +12,8 @@
   "devDependencies": {
     "@cucumber/cucumber": "^9.5.1",
     "@playwright/test": "^1.38.0",
-    "@types/cucumber": "^7.0.0",
-    "@types/cucumber-html-reporter": "^5.0.1",
     "@types/node": "^20.6.3",
-    "cucumber-html-reporter": "^5.5.0",
+    "cucumber-html-reporter": "^7.1.1",
     "ts-node": "^10.9.1"
   },
   "dependencies": {
