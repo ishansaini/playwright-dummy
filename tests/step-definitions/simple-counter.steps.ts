@@ -20,6 +20,18 @@ When('User clicks on "GET STARTED" button', async function (this: ICustomWorld) 
 
 Then('User is able to navigate to community tab', async function (this: ICustomWorld) {
     const page = this.page!
-    await page.getByRole('link', { name: 'Community' }).click();
+    await page.getByRole('link', { name: 'Community' }).click()
     await expect(page.getByRole('heading', {name: 'Ambassadors'})).toBeVisible
+})
+
+When('User is able to navigate to docs tab', async function (this: ICustomWorld) {
+    const page = this.page!
+    await page.getByRole('link', { name: 'Docs'}).click();
+    await expect(page.getByRole('heading', {name: 'Installation'})).toBeVisible
+})
+
+Then('User is able to navigate to expand integrations', async function (this:ICustomWorld) {
+    const page = this.page!
+    await page.getByRole('link', { name: 'Integrations'}).click();
+    await expect(page.getByRole('link', {name: 'Continuous Integration'})).toBeVisible
 })

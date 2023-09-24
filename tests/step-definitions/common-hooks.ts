@@ -4,7 +4,7 @@ import {
 	ChromiumBrowser,
 	chromium
 } from '@playwright/test'
-import { After, AfterAll, Before, BeforeAll } from '@cucumber/cucumber'
+import { After, AfterAll, AfterStep, Before, BeforeAll } from '@cucumber/cucumber'
 
 let browser: ChromiumBrowser
 
@@ -15,6 +15,10 @@ BeforeAll(async function() {
 Before(async function(this: ICustomWorld, scenario) {
   this.context = await browser.newContext()
   this.page = await this.context.newPage()
+});
+
+AfterStep(async function(this: ICustomWorld, scenario) {
+  console.log(scenario.pickleStep.text);
 });
 
 After(async function(this: ICustomWorld, scenario) {
@@ -29,6 +33,7 @@ After(async function(this: ICustomWorld, scenario) {
     ])
     .addLink('View staging deployment!', 'https://github.com')
     .write()
+
   await this.page?.close()
   await this.context?.close()
 });

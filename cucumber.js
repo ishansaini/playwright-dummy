@@ -8,7 +8,6 @@ const config = {
       'json:reports/cucumber_report.json',
     ],
     formatOptions: { snippetInterface: 'async-await' },
-    publishQuiet: true,
   };
 
 module.exports = {
