@@ -19,6 +19,9 @@ jobs:
         run: npx playwright install --with-deps
       - name: Run Playwright tests
         run: npm run test:e2e
+      - name: Generate Job Summary
+        if: always()
+        run: node generateJobSummary.js
       - uses: actions/upload-artifact@v4
         if: always()
         with:
